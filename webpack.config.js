@@ -3,18 +3,27 @@ const webpack = require('webpack');
 
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index.tsx',
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: ['babel-loader']
-            }
+                test: /\.[tj]sx?$/,
+                //exclude: /node_modules/,
+                use: [
+                    'babel-loader'
+                ]
+            },
+            {
+                test: /\.js$/,
+                use: [
+                    "source-map-loader"
+                ],
+                enforce: "pre"
+            },
         ]
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx']
+        extensions: ['*', '.ts', '.tsx', '.js', '.jsx']
     },
     output: {
         path: __dirname + '/dist',
